@@ -1,42 +1,31 @@
 package com.ragaslan.rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
-@Table(name = "tags")
+@Table(name = "tag")
+@Data
 public class PostTag {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 
-    @Column(name = "name")
+    @Column(name = "name",unique = true)
     public String name;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    public Post post;
+    @ManyToMany
+    @JsonIgnoreProperties("tags")
+    @JoinTable(
+            name = "tags_posts",
+            joinColumns = { @JoinColumn(name = "post_tag_id")},
+            inverseJoinColumns = { @JoinColumn(name = "post_id") }
+    )
+    public List<Post> posts;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
 }

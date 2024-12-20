@@ -8,6 +8,7 @@ import java.util.List;
 public interface PostTagDAO {
     void save(PostTag postTag);
     PostTag findById(Integer id);
+    PostTag findByName(String name);
     List<PostTag> findAll();
     void update(PostTag postTag);
     void delete(Integer id);

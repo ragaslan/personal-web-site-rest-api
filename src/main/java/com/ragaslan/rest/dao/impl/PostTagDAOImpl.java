@@ -1,8 +1,10 @@
 package com.ragaslan.rest.dao.impl;
 
 import com.ragaslan.rest.dao.PostTagDAO;
+import com.ragaslan.rest.entity.Post;
 import com.ragaslan.rest.entity.PostTag;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,6 +31,16 @@ public class PostTagDAOImpl implements PostTagDAO {
         return entityManager.find(PostTag.class, id);
     }
 
+    @Override
+    public PostTag findByName(String name){
+        try{
+            TypedQuery<PostTag> query = entityManager.createQuery("select tag from PostTag tag where tag.name = :tagName",PostTag.class);
+            query.setParameter("tagName",name);
+            return query.getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
     @Override
     public List<PostTag> findAll(){
         TypedQuery<PostTag> query = entityManager.createQuery("from PostTag",PostTag.class);

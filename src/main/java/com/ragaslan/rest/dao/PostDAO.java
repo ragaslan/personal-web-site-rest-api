@@ -1,6 +1,7 @@
 package com.ragaslan.rest.dao;
 
 import com.ragaslan.rest.entity.Post;
+import com.ragaslan.rest.entity.PostTag;
 
 import java.util.List;
 

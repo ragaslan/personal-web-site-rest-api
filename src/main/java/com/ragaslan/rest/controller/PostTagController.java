@@ -26,7 +26,8 @@ public class PostTagController {
 
     @GetMapping("/")
     public ResponseEntity<List<PostTag>> findAll(){
-        return new ResponseEntity<>(postTagService.findAll(), HttpStatus.OK);
+        List<PostTag> tags = postTagService.findAll();
+        return new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

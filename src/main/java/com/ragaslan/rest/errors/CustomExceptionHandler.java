@@ -1,5 +1,6 @@
 package com.ragaslan.rest.errors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<CustomError> handleException(RuntimeException exception){
+        //System.out.println(exception.getLocalizedMessage());
         CustomError err = new CustomError();
         err.setStatus(400);
         err.setMessage(exception.getMessage());
@@ -33,5 +35,14 @@ public class CustomExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<CustomError> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        //System.out.println(ex.getLocalizedMessage());
+        CustomError err = new CustomError();
+        err.setStatus(400);
+        err.setMessage("This already exist !");
+        return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
     }
 }

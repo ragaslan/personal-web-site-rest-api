@@ -1,15 +1,18 @@
 package com.ragaslan.rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "post")
+@Data
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 
     @Column(name = "title")
@@ -24,55 +27,8 @@ public class Post {
     @Column(name = "created_at")
     public String createdAt;
 
-    @OneToMany(mappedBy = "post")
+    @JsonIgnoreProperties("posts")
+    @ManyToMany(mappedBy = "posts")
     private List<PostTag> tags;
 
-
-    public List<PostTag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<PostTag> tags) {
-        this.tags = tags;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

@@ -1,8 +1,10 @@
 package com.ragaslan.rest.controller;
 
 import com.ragaslan.rest.entity.Post;
+import com.ragaslan.rest.entity.PostTag;
 import com.ragaslan.rest.service.PostService;
 import dto.PostDTO;
+import dto.PostTagDTO;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +39,26 @@ public class PostController {
         return new ResponseEntity<>(thePost,HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/tags/")
+    public ResponseEntity<List<PostTag>> getAllTags(@PathVariable Integer id){
+        List<PostTag> tags = postService.getAllTags(id);
+        return new ResponseEntity<>(tags,HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Post> create(@Valid @RequestBody PostDTO thePost){
         ModelMapper mapper = new ModelMapper();
         Post newPost = mapper.map(thePost,Post.class);
         Post createdPost = postService.create(newPost);
         return new ResponseEntity<>(createdPost,HttpStatus.CREATED);
+    }
+
+    @PostMapping("{id}/tags/")
+    public ResponseEntity<List<PostTag>> addTag(@PathVariable Integer id, @RequestBody PostTagDTO thePostTagDto){
+        ModelMapper mapper = new ModelMapper();
+        PostTag theTag = mapper.map(thePostTagDto,PostTag.class);
+        List<PostTag> tags = postService.addTag(id,theTag);
+        return new ResponseEntity<>(tags,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

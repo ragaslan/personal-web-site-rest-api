@@ -12,4 +12,5 @@ public interface PostTagService {
     PostTag create(PostTag thePostTag);
     void deleteById(Integer id);
     PostTag updateById(Integer id,PostTag thePostTag);
+
 }
