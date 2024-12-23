@@ -17,4 +17,5 @@ public class Language {
 
     @Column(name = "is_tool")
     private boolean isTool;
+
 }

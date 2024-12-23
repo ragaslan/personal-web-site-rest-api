@@ -2,7 +2,8 @@ package com.ragaslan.rest.controller;
 
 import com.ragaslan.rest.entity.GeneralSettings;
 import com.ragaslan.rest.service.GeneralSettingsService;
-import dto.GeneralSettingsDTO;
+import com.ragaslan.rest.dto.GeneralSettingsDTO;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class GeneralSettingsController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GeneralSettings> setSettings(@RequestBody GeneralSettingsDTO settingsFromUser){
+    public ResponseEntity<GeneralSettings> setSettings(@Valid @RequestBody GeneralSettingsDTO settingsFromUser){
         ModelMapper mapper = new ModelMapper();
         GeneralSettings settings = mapper.map(settingsFromUser,GeneralSettings.class);
         generalSettingsService.setSettings(settings);

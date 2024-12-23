@@ -2,7 +2,8 @@ package com.ragaslan.rest.controller;
 
 import com.ragaslan.rest.entity.Language;
 import com.ragaslan.rest.service.LanguageService;
-import dto.LanguageDTO;
+import com.ragaslan.rest.dto.LanguageDTO;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class LanguageController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Language> create(@RequestBody LanguageDTO languageDTO){
+    public ResponseEntity<Language> create(@Valid @RequestBody LanguageDTO languageDTO){
         ModelMapper mapper = new ModelMapper();
         Language theLang = mapper.map(languageDTO,Language.class);
         Language createdLang = languageService.create(theLang);
@@ -56,7 +57,7 @@ public class LanguageController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Language> update(@PathVariable Integer id,@RequestBody LanguageDTO languageDTO){
+    public ResponseEntity<Language> update(@PathVariable Integer id,@Valid @RequestBody LanguageDTO languageDTO){
         ModelMapper mapper = new ModelMapper();
         Language theLang = mapper.map(languageDTO,Language.class);
         Language updatedLang = languageService.updateById(id,theLang);

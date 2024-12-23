@@ -1,4 +1,4 @@
-package dto;
+package com.ragaslan.rest.dto;
 
 import lombok.Data;
 

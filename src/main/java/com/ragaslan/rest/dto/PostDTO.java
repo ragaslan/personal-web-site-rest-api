@@ -1,4 +1,4 @@
-package dto;
+package com.ragaslan.rest.dto;
 
 import com.ragaslan.rest.entity.PostTag;
 import jakarta.validation.constraints.NotBlank;
