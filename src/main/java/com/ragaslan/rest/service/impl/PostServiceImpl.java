@@ -2,6 +2,7 @@ package com.ragaslan.rest.service.impl;
 
 import com.ragaslan.rest.dao.PostDAO;
 import com.ragaslan.rest.dao.PostTagDAO;
+import com.ragaslan.rest.entity.Language;
 import com.ragaslan.rest.entity.Post;
 import com.ragaslan.rest.entity.PostTag;
 import com.ragaslan.rest.service.PostService;
@@ -81,6 +82,10 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void deleteById(Integer id){
+        Post thePost = postDAO.findById(id);
+        if(thePost == null){
+            throw new RuntimeException("There is no post with this id !");
+        }
         postDAO.delete(id);
     }
 

@@ -63,11 +63,7 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id){
-        Post thePost = postService.findById(id);
-        if(thePost == null){
-            throw new RuntimeException("There is no post with this post id");
-        }
-        postService.deleteById(thePost.getId());
+        postService.deleteById(id);
         return new ResponseEntity<>("The post is deleted successfully !",HttpStatus.OK);
     }
 
