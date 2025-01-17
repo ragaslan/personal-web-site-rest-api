@@ -12,6 +12,5 @@ public class LanguageDTO {
     public String name;
 
     @NotNull(message = "isTool is mandatory !")
-    @NotBlank(message = "isTool is mandatory !")
     public boolean isTool;
 }

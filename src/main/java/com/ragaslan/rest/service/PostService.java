@@ -9,6 +9,7 @@ public interface PostService {
     List<Post> findAll();
     Post findById(Integer id);
     Post create(Post thePost);
+    Post findBySlug(String slug);
     void deleteById(Integer id);
     Post updateById(Integer id,Post thePost);
     List<PostTag> getAllTags(Integer id);

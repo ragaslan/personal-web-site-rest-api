@@ -38,6 +38,14 @@ public class PostController {
         }
         return new ResponseEntity<>(thePost,HttpStatus.OK);
     }
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<Post> findBySlug(@PathVariable String slug){
+        Post thePost = postService.findBySlug(slug);
+        if(thePost == null){
+            throw new RuntimeException("There is no post with this slug title.");
+        }
+        return new ResponseEntity<>(thePost,HttpStatus.OK);
+    }
 
     @GetMapping("/{id}/tags/")
     public ResponseEntity<List<PostTag>> getAllTags(@PathVariable Integer id){

@@ -80,6 +80,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post findBySlug(String slug) {
+        return postDAO.findBySlug(slug);
+
+    }
+
+    @Override
     @Transactional
     public void deleteById(Integer id){
         Post thePost = postDAO.findById(id);

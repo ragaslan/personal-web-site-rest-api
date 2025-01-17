@@ -3,6 +3,7 @@ package com.ragaslan.rest.service.impl;
 import com.ragaslan.rest.dao.PostTagDAO;
 import com.ragaslan.rest.entity.PostTag;
 import com.ragaslan.rest.service.PostTagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ public class PostTagServiceImpl implements PostTagService {
 
     private final PostTagDAO postTagDAO;
 
+    @Autowired
     public PostTagServiceImpl(PostTagDAO postTagDAO){
         this.postTagDAO = postTagDAO;
     }

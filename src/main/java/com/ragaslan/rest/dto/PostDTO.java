@@ -4,6 +4,7 @@ import com.ragaslan.rest.entity.PostTag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class PostDTO {
 
     @NotNull(message = "Content is mandatory !")
     @NotBlank(message = "Content is mandatory !")
+    @Length
     public String content;
 
     @NotNull(message = "Author is mandatory !")
